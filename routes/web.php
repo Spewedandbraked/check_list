@@ -20,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/pagename', [ListsController::class, 'index'])->name('list.index'); // какая-то хуита, надо связать дашборд и это недоразумение
     Route::get('/pagename2', [ListsController::class, 'create'])->name('list.create');
+    Route::post('/pagename2', [ListsController::class, 'store'])->name('list.store');
 });
 
 Route::middleware('auth')->group(function () {

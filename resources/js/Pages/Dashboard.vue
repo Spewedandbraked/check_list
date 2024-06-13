@@ -8,5 +8,6 @@ import { Head } from '@inertiajs/vue3';
 
     <AuthenticatedLayout>
         <div class="text-gray-900">You're logged in!</div>
+        
     </AuthenticatedLayout>
 </template>
