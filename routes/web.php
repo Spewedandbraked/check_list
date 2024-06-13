@@ -18,7 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/pagename', [ListsController::class, 'index'])->name('list.index');
+    Route::get('/pagename', [ListsController::class, 'index'])->name('list.index'); // какая-то хуита, надо связать дашборд и это недоразумение
     Route::get('/pagename2', [ListsController::class, 'create'])->name('list.create');
 });
 
