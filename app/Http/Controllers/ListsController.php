@@ -11,19 +11,15 @@ use Inertia\Inertia;
 
 class ListsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        $lists = Lists::all()->where('author', Auth::id());
         return Inertia::render('Dashboard', [
-            //params
+            // dd($lists)
+            'lists' => $lists
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render('CreateCheck', [
@@ -31,9 +27,6 @@ class ListsController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $list = Lists::create([
@@ -58,33 +51,24 @@ class ListsController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $list =Lists::where('id', $id)->first();
+        return Inertia::render('Checksingle', [
+            'list' => $list
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
