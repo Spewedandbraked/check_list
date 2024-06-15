@@ -42,7 +42,6 @@ const a = () => {console.log(b)}
   </script>
 <template>
     <Head title="Dashboard" />
-
      <AuthenticatedLayout>  <!--ЭТО КОШМАР!!!! ОНО РАБОТАЕТ КАК ДЕРЕКТИВА БЛЕЙД!!!! ФОРМА ОБРАБАТЫВАЕТСЯ БЛЕЙДОМ!!! Я ПОНИМАЮ ПОЧЕМУ И МНЕ ПЛОХО!!!-->
         <form @click="handleRequest2" method="POST">
         <csrf></csrf>
@@ -52,7 +51,6 @@ const a = () => {console.log(b)}
                 <Textinput v-model="listDesc" placeholder="Desscription" class="w-full h-64" type="text" name='description'> </Textinput>
             </div> 
         </miniAuthLayout>
-
         <miniAuthLayout>    <!-- quesstions -->
             <div v-for="question in questions" :key="question">
                 <p>Question #{{ question }}</p>
@@ -63,7 +61,6 @@ const a = () => {console.log(b)}
                 <SecondaryButton   v-on:click="questions--" v-if="questions>1">Убрать вопрос из списка</SecondaryButton>
             </div>
         </miniAuthLayout>
-
         <miniAuthLayout>    <!-- options -->
             <div class="flex" style="justify-content: space-around;">
                 <div v-for="option in options" :key="option">
@@ -76,17 +73,9 @@ const a = () => {console.log(b)}
                 <SecondaryButton   v-on:click="options--" v-if="options>2">Убрать вариант из списка</SecondaryButton>
             </div>
         </miniAuthLayout>
-
         <miniAuthLayout class="flex">
             <DangerButton>Отправить</DangerButton>
         </miniAuthLayout>
         </form>
-        {{ listQue }}
-        {{ listOpt }}
-
-        <form @submit.prevent="console.log('a')">
-            <DangerButton>Отправить</DangerButton>
-        </form>
     </AuthenticatedLayout>
-    
 </template>
