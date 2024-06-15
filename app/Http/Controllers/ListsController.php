@@ -41,7 +41,7 @@ class ListsController extends Controller
             'description'=>$request->input('listDesc'),
             'author'=> Auth::id(),
         ]);
-        $id = $list->id; //🙄боже
+        $id = $list->id; //🙄боже так тупо
 
         foreach ($request->input('questions') as $data){
             $question = QuestionsTable::create([
