@@ -1,10 +1,17 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import miniAuthLayout from '@/Components/miniAuthLayout.vue';
+import DangerButton from '@/Components/DangerButton.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
     list: {
+        type: Object,
+    },
+    options: {
+        type: Object,
+    },
+    questions: {
         type: Object,
     },
 });
@@ -14,14 +21,44 @@ defineProps({
 
     <AuthenticatedLayout>
         <miniAuthLayout>
-            <div class="flex" style="justify-content: space-around; flex-wrap: wrap;">
-                <div class="card p-6">
-                    <div class="card-details">
-                        <p class="text-title">{{ list.title }}</p>
-                        <p class="text-body">{{ list.description }}</p>
-                    </div>
-                </div>
-            </div>
+            <h1>{{ list.title }}</h1><br><h2>{{ list.description }}</h2>
+            <table>
+                <tr>
+                    <th style="width: 75%;"></th><!-- empty -->
+                    <th v-for="option in options" :key="option">{{ option.content }}</th>
+                </tr>
+                <tr v-for="question in questions" :key="question">
+                    <th style="width: 75%;">{{ question.content }}</th>
+                    <th v-for="option in options" :key="option"></th>
+                </tr>
+            </table>
+        </miniAuthLayout>
+        <miniAuthLayout>
+            <form @submit.prevent="submit">
+                <DangerButton>Удалить</DangerButton>
+            </form>
         </miniAuthLayout>
     </AuthenticatedLayout>
 </template>
+
+<style>
+td, th {
+  text-align: left;
+}
+table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse; 
+}
+th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+}
+</style>

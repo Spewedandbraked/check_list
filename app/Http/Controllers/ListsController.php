@@ -53,9 +53,13 @@ class ListsController extends Controller
 
     public function show(string $id)
     {
-        $list =Lists::where('id', $id)->first();
+        $list = Lists::where('id', $id)->first();
+        $options = OptionsTable::all()->where('list_id', $list->id);
+        $questions = QuestionsTable::all()->where('list_id', $list->id);
         return Inertia::render('Checksingle', [
-            'list' => $list
+            'list' => $list,
+            'options' => $options,
+            'questions' => $questions,
         ]);
     }
 

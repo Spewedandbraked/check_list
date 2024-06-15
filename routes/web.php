@@ -22,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pagename/create', [ListsController::class, 'create'])->name('list.create');
     Route::post('/pagename/create', [ListsController::class, 'store'])->name('list.store');
     Route::get('/pagename2/{ListId}', [ListsController::class, 'show'])->name('list.show');
+    Route::delete('/pagename2/{ListId}', [ListsController::class, 'show'])->name('list.show');
 });
 
 Route::middleware('auth')->group(function () {

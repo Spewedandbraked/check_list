@@ -7,6 +7,10 @@ defineProps({
     lists: {
         type: Object,
     },
+    cancreate:{
+        type: Boolean,
+        default: true,
+    }
 });
 </script>
 <template>
@@ -16,14 +20,22 @@ defineProps({
         <miniAuthLayout>
             <div class="flex" style="justify-content: space-around; flex-wrap: wrap;">
                 <div v-for="list in lists" :key="list" class="p-6">
-                <div class="card">
-                    <div class="card-details">
-                        <p class="text-title">{{ list.title }}</p>
-                        <p class="text-body">{{ list.description }}</p>
+                    <div class="card">
+                        <div class="card-details">
+                            <p class="text-title">{{ list.title }}</p>
+                            <p class="text-body">{{ list.description }}</p>
+                        </div>
+                        <a class="card-button" style="text-align: center;" :href="route('list.show',[list.id])">Открыть</a>
                     </div>
-                    <a class="card-button" style="text-align: center;" :href="route('list.show',[list.id])">Открыть</a>
                 </div>
-            </div>
+                <div v-if="cancreate==true" class="p-6">
+                    <div class="card" style="background-color: lightgreen;">
+                        <div class="card-details">
+                            <p class="text-title">+</p>
+                        </div>
+                        <a class="card-button" style="text-align: center;" :href="route('list.create')">Создать</a>
+                    </div>
+                </div>
             </div>
         </miniAuthLayout>
     </AuthenticatedLayout>
