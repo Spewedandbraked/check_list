@@ -20,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [ListsController::class, 'index'])->name('dashboard'); // какая-то хуита, надо связать дашборд и это недоразумение
     Route::get('/pagename/create', [ListsController::class, 'create'])->name('list.create');
-    Route::post('/pagename2', [ListsController::class, 'store'])->name('list.store');
+    Route::post('/pagename/create', [ListsController::class, 'store'])->name('list.store');
     Route::get('/pagename2/{ListId}', [ListsController::class, 'show'])->name('list.show');
 });
 
