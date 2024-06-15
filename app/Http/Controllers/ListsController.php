@@ -49,6 +49,7 @@ class ListsController extends Controller
                 'list_id'=>$id,
             ]);
         }
+        return redirect('dashboard');
     }
 
     public function show(string $id)

@@ -42,7 +42,7 @@ const remove = ($vabriale) => {
         </miniAuthLayout>
         <miniAuthLayout>
             <form @submit.prevent="remove(list.id)">
-                <button>Удалить</button>
+                <DangerButton>Удалить</DangerButton>
             </form>
         </miniAuthLayout>
     </AuthenticatedLayout>
