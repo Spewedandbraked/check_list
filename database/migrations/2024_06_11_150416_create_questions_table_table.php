@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('questions_tables', function (Blueprint $table) {
             $table->id()->foreign('answers.question_id');
             $table->unsignedBigInteger('list_id');
-            $table->foreign('list_id')->references('id')->on('lists');
+            $table->foreign('list_id')->references('id')->on('lists')->onDelete('cascade');
             $table->string('content');
         });
 

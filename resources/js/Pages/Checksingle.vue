@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import miniAuthLayout from '@/Components/miniAuthLayout.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
     list: {
@@ -15,6 +15,13 @@ defineProps({
         type: Object,
     },
 });
+
+const form = useForm({
+});
+
+const remove = ($vabriale) => {
+    form.delete(route('list.delete',[$vabriale]));
+};
 </script>
 <template>
     <Head title="Dashboard" />
@@ -34,8 +41,8 @@ defineProps({
             </table>
         </miniAuthLayout>
         <miniAuthLayout>
-            <form @submit.prevent="submit">
-                <DangerButton>Удалить</DangerButton>
+            <form @submit.prevent="remove(list.id)">
+                <button>Удалить</button>
             </form>
         </miniAuthLayout>
     </AuthenticatedLayout>

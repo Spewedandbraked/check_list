@@ -75,6 +75,7 @@ class ListsController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        Lists::find($id)->delete();
+        return redirect('dashboard');
     }
 }
