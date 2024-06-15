@@ -1,66 +1,62 @@
-<script setup>
+<script>
+import axios from 'axios';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm} from '@inertiajs/vue3';
-import { ref } from 'vue'
 import Textinput from '../Components/TextField.vue'
 import miniAuthLayout from '../Components/miniAuthLayout.vue'
 import SecondaryButton from '../Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-
-defineProps({
-    // prop: {
-    //     type: Boolean,
-    // },
-});
-const questions = ref(1);
-const options = ref(2);
+import csrf from '../Components/csrf.vue'
+export default{
+  data(){
+    return{
+      questions: 1,    
+      options:2,
+      listTitle:null,
+      listDesc:null,
+      listQue:{},
+      listOpt:{},
+    }
+  },
+  components: {
+    AuthenticatedLayout: AuthenticatedLayout,
+    Head: Head,
+    Textinput: Textinput,
+    miniAuthLayout: miniAuthLayout,
+    SecondaryButton: SecondaryButton,
+    DangerButton: DangerButton,
+    csrf: csrf,
+  },
+  methods:{
+  }
+}
 const form = useForm({
-    listTitle: '',
-    listDesc: '',
-    questions: {},
-    options: {},
+    some: '1',
 });
-
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => console.log(form),
+    form.post(route('/pagename2'), {
+        onFinish: () => console.log(a),
     });
 };
-</script>
-
+const a = () => {console.log(b)}
+  </script>
 <template>
     <Head title="Dashboard" />
 
-     <AuthenticatedLayout>
-        <form @submit.prevent="submit">
+     <AuthenticatedLayout>  <!--ЭТО КОШМАР!!!! ОНО РАБОТАЕТ КАК ДЕРЕКТИВА БЛЕЙД!!!! ФОРМА ОБРАБАТЫВАЕТСЯ БЛЕЙДОМ!!! Я ПОНИМАЮ ПОЧЕМУ И МНЕ ПЛОХО!!!-->
+        <form @click="handleRequest2" method="POST">
+        <csrf></csrf>
         <miniAuthLayout>    <!-- title + description -->
-            <div>
-                <Textinput 
-                    type="text" 
-                    placeholder="Check Lisst Title"
-                    v-model="form.listTitle"
-                    required
-                />
-                <Textinput 
-                    type="text" 
-                    class="w-full h-64"
-                    placeholder="Desscription"
-                    v-model="form.listDesc"
-                    required
-                />
+            <div class="">
+                <Textinput v-model="listTitle" placeholder="Check Lisst Title" type="text" name='title'></Textinput>
+                <Textinput v-model="listDesc" placeholder="Desscription" class="w-full h-64" type="text" name='description'> </Textinput>
             </div> 
         </miniAuthLayout>
 
         <miniAuthLayout>    <!-- quesstions -->
             <div v-for="question in questions" :key="question">
                 <p>Question #{{ question }}</p>
-                <Textinput 
-                    type="text" 
-                    placeholder="question" 
-                    class="w-full"
-                    v-model="form.questions[question]"
-                    required
-                />
+                <Textinput v-model="listQue[question]" :name='listQue' type="text" placeholder="Desscription" class="w-full"> </Textinput>
             </div>
             <div>
                 <SecondaryButton v-on:click="questions++" v-if="questions<10">Добавить вопрос в список</SecondaryButton>
@@ -72,13 +68,7 @@ const submit = () => {
             <div class="flex" style="justify-content: space-around;">
                 <div v-for="option in options" :key="option">
                     <p>Option #{{ option }}</p>
-                    <Textinput 
-                    type="text" 
-                    placeholder="option" 
-                    class="w-full"
-                    v-model="form.options[option]"
-                    required
-                />
+                    <Textinput type="text" placeholder="Check Lisst Title" ></Textinput>
                 </div>
             </div>
             <div>
@@ -90,6 +80,12 @@ const submit = () => {
         <miniAuthLayout class="flex">
             <DangerButton>Отправить</DangerButton>
         </miniAuthLayout>
+        </form>
+        {{ listQue }}
+        {{ listOpt }}
+
+        <form @submit.prevent="console.log('a')">
+            <DangerButton>Отправить</DangerButton>
         </form>
     </AuthenticatedLayout>
     

@@ -20,7 +20,7 @@ defineProps(['placeholder'])
 </script>
 
 <template>
-    <input
+    <textarea
         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-pretty"
         style="overflow-wrap: break-word;"
         v-model="model"
