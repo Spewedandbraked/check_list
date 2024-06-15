@@ -22,9 +22,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('list.create'), {
-        onFinish: () => console.log(form),
-    });
+    form.post(route('list.create'));
 };
 </script>
 

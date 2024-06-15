@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lists;
+use App\Models\OptionsTable;
+use App\Models\QuestionsTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ListsController extends Controller
@@ -32,7 +36,26 @@ class ListsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $list = Lists::create([
+            'title'=>$request->input('listTitle'),
+            'description'=>$request->input('listDesc'),
+            'author'=> Auth::id(),
+        ]);
+        $id = $list->id; //🙄боже
+
+        foreach ($request->input('questions') as $data){
+            $question = QuestionsTable::create([
+                'content'=>$data,
+                'list_id'=>$id,
+            ]);
+        }
+
+        foreach ($request->input('options') as $data){
+            $option = OptionsTable::create([
+                'content'=>$data,
+                'list_id'=>$id,
+            ]);
+        }
     }
 
     /**

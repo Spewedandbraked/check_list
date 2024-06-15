@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('questions_table', function (Blueprint $table) {
+        Schema::create('questions_tables', function (Blueprint $table) {
             $table->id()->foreign('answers.question_id');
             $table->unsignedBigInteger('list_id');
             $table->foreign('list_id')->references('id')->on('lists');
