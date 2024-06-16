@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ListsController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -13,16 +14,16 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return Inertia::render('Dashboard');
-    // })->name('dashboard');
 
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [ListsController::class, 'index'])->name('dashboard'); // какая-то хуита, надо связать дашборд и это недоразумение
     Route::get('/pagename/create', [ListsController::class, 'create'])->name('list.create');
     Route::post('/pagename/create', [ListsController::class, 'store'])->name('list.store');
     Route::get('/pagename2/{ListId}', [ListsController::class, 'show'])->name('list.show');
     Route::delete('/pagename2/{ListId}', [ListsController::class, 'destroy'])->name('list.delete');
+
+    Route::get('pdf/{ListId}', [PDFController::class, 'index'])->name('pdf');
+    // Route::get('pdf2/{ListId}', [PDFController::class, 'index2'])->name('pdf2');
 });
 
 Route::middleware('auth')->group(function () {

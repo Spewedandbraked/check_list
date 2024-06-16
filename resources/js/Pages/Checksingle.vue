@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import miniAuthLayout from '@/Components/miniAuthLayout.vue';
 import DangerButton from '@/Components/DangerButton.vue';
+import SecondaryButton from '../Components/SecondaryButton.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
@@ -44,6 +45,9 @@ const remove = ($vabriale) => {
             <form @submit.prevent="remove(list.id)">
                 <DangerButton>Удалить</DangerButton>
             </form>
+            <a :href="route('pdf', [list.id])">
+                <SecondaryButton>Скачать в PDF</SecondaryButton>
+            </a>
         </miniAuthLayout>
     </AuthenticatedLayout>
 </template>
