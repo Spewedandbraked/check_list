@@ -8,7 +8,7 @@
 </head>
 <body>
     
-                <h1>{{ $list->title }}</h1><br><h2>{{ $list->description }}</h2>
+                <h1>{{ $list->title }}</h1><br><h6>{{ $list->description }}</h6>
                 <table>
                     <tr>
                         <th style="width: 75%;"></th><!-- empty -->
