@@ -26,7 +26,7 @@ const tabs = {
         <div
             v-if="$page.props.auth.user"
             class="-max-w-full diplay:">
-            <Dashboard />
+            <Dashboard cancreate="false"/>
         </div>
         <template v-else>
             <div class="flex flex-1 justify-center" style="position: absolute; width: 100%;">

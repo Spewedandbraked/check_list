@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\admin;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,9 +16,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::middleware(admin::class)->prefix('admin')->group(function (){
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [ListsController::class, 'index'])->name('dashboard'); // какая-то хуита, надо связать дашборд и это недоразумение
+    Route::get('/dashboard', [ListsController::class, 'index'])->name('dashboard');
     Route::get('/pagename/create', [ListsController::class, 'create'])->name('list.create');
     Route::post('/pagename/create', [ListsController::class, 'store'])->name('list.store');
     Route::get('/pagename2/{ListId}', [ListsController::class, 'show'])->name('list.show');
