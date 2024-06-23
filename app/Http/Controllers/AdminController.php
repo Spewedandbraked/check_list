@@ -17,6 +17,7 @@ class AdminController extends Controller
         return Inertia::render('Dashboard', [
             'lists' => $lists,
             'cancreate' => false,
+            'admin' => true, // все равно мидлвейр не пропустит
         ]);
     }
 

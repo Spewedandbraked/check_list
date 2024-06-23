@@ -8,6 +8,7 @@ use App\Models\QuestionsTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Symfony\Component\Mime\Part\MessagePart;
 
 class ListsController extends Controller
 {
@@ -56,13 +57,16 @@ class ListsController extends Controller
     public function show(string $id)
     {
         $list = Lists::where('id', $id)->first();
-        $options = OptionsTable::all()->where('list_id', $list->id);
-        $questions = QuestionsTable::all()->where('list_id', $list->id);
-        return Inertia::render('Checksingle', [
-            'list' => $list,
-            'options' => $options,
-            'questions' => $questions,
-        ]);
+        if (Auth::user()->isAdmin()==true || $list->author == Auth::id())  {
+            $options = OptionsTable::all()->where('list_id', $list->id);
+            $questions = QuestionsTable::all()->where('list_id', $list->id);
+            return Inertia::render('Checksingle', [
+                'list' => $list,
+                'options' => $options,
+                'questions' => $questions,
+            ]);
+        }
+        return 'acces denied !!!';
     }
 
     public function edit(string $id)
