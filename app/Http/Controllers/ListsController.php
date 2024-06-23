@@ -81,6 +81,9 @@ class ListsController extends Controller
 
     public function destroy(string $id)
     {
+        if (Auth::user()->isAdmin()==false && Lists::where('id', $id)->first()->author != Auth::id())  {
+            return 'acces denied !!!';
+        }
         Lists::find($id)->delete();
         return redirect('dashboard');
     }
