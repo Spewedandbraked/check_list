@@ -16,7 +16,8 @@ class ListsController extends Controller
         $lists = Lists::all()->where('author', Auth::id());
         return Inertia::render('Dashboard', [
             // dd($lists)
-            'lists' => $lists
+            'lists' => $lists,
+            'admin' => Auth::user()->isAdmin() == true,
         ]);
     }
 

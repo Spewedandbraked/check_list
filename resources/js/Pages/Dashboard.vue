@@ -10,13 +10,17 @@ defineProps({
     cancreate:{
         type: Boolean,
         default: true,
+    },
+    admin:{
+        type: Boolean,
+        default: false,
     }
 });
 </script>
 <template>
     <Head title="Dashboard" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :admin=admin>
         <miniAuthLayout>
             <div class="flex" style="justify-content: space-around; flex-wrap: wrap;">
                 <div v-for="list in lists" :key="list" class="p-6">
